@@ -15,3 +15,16 @@
 *.PDF	 diff=astextplain
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
+
+.vs
+Debug
+Release
+libs/
+*.sdf
+.codelite
+.clang
+*log.txt
+*.opensdf
+*.suo
+*.exe
+
