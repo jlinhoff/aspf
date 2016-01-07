@@ -96,5 +96,7 @@
     <File Name="code/vers.h"/>
     <File Name="code/base.c"/>
     <File Name="code/base.h"/>
+    <File Name="code/sz.c"/>
+    <File Name="code/sz.h"/>
   </VirtualDirectory>
 </CodeLite_Project>

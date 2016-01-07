@@ -30,6 +30,29 @@ extern "C" {        //
 extern "C" {        //
 #endif              //
 
+#if UINTPTR_MAX==UINT64_MAX
+#define BUILD_64BIT 1
+#else // !BUILD_64BIT
+#define BUILD_64BIT 0
+#endif // !BUILD_64BIT
+
+#define NUM(_a_) (sizeof(_a_)/sizeof(_a_[0])) ///< number of entries
+
+#define PTR_ADD(_p_,_i_) (void*)(((uint8_t*)(_p_))+(_i_))
+#define PTR_SUB(_p_,_i_) (void*)(((uint8_t*)(_p_))-(_i_))
+#define PTR_DIFF(_p1_,_p2_) ((int)((uint8_t*)(_p1_)-(uint8_t*)(_p2_)))
+
+typedef char chr;
+typedef void* ptr;
+typedef unsigned int uns;
+typedef int (*fnc_ipi)(ptr,int);
+
+#if BUILD_64BIT
+typedef int64_t intptr; // pointer as int
+#else // !BUILD_64BIT
+typedef int32_t intptr; // pointer as int
+#endif // !BUILD_64BIT
+
 #ifndef SPF_API
 #if BUILD_SPF_EXPORTS
    #define SPF_API __declspec(dllexport)
@@ -39,6 +62,22 @@ extern "C" {        //
    #define SPF_API extern
 #endif
 #endif // ndef SPF_API
+
+#include <stdarg.h>
+#define vargs va_list
+#define varg_start va_start
+#define varg_end va_end
+#define varg_next va_arg
+
+#define varg_next_vargs(_args_) \
+   {vargs *varp=varg_next(args,vargs*);va_copy(_args_,*varp);}
+   
+#define FLOATS_PASSED_AS double
+
+#define BRK()
+
+// test for NaN, inf, ind
+#define FLT_IS_ERR(_f_) (((_f_)!=(_f_))||(0!=(_f_)-(_f_)))
 
 ////////////////////////////////////////////////////////////////////////////////
 // SPF

@@ -5,8 +5,8 @@
 ## Debug
 ProjectName            :=spf
 ConfigurationName      :=Debug
-WorkspacePath          := "C:\Users\Joe\aspf\workspace"
-ProjectPath            := "C:\Users\Joe\aspf\workspace"
+WorkspacePath          := "D:\aspf\workspace"
+ProjectPath            := "D:\aspf\workspace"
 IntermediateDirectory  :=./Debug
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
@@ -62,7 +62,7 @@ AS       := C:/TDM-GCC-64/bin/as.exe
 ## User defined environment variables
 ##
 CodeLiteDir:=C:\Program Files\CodeLite
-Objects0=$(IntermediateDirectory)/code_main.c$(ObjectSuffix) $(IntermediateDirectory)/code_base.c$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/code_main.c$(ObjectSuffix) $(IntermediateDirectory)/code_base.c$(ObjectSuffix) $(IntermediateDirectory)/code_sz.c$(ObjectSuffix) 
 
 
 
@@ -94,7 +94,7 @@ PreBuild:
 ## Objects
 ##
 $(IntermediateDirectory)/code_main.c$(ObjectSuffix): code/main.c $(IntermediateDirectory)/code_main.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "C:/Users/Joe/aspf/workspace/code/main.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/code_main.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "D:/aspf/workspace/code/main.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/code_main.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/code_main.c$(DependSuffix): code/main.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/code_main.c$(ObjectSuffix) -MF$(IntermediateDirectory)/code_main.c$(DependSuffix) -MM "code/main.c"
 
@@ -102,12 +102,20 @@ $(IntermediateDirectory)/code_main.c$(PreprocessSuffix): code/main.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/code_main.c$(PreprocessSuffix) "code/main.c"
 
 $(IntermediateDirectory)/code_base.c$(ObjectSuffix): code/base.c $(IntermediateDirectory)/code_base.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "C:/Users/Joe/aspf/workspace/code/base.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/code_base.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "D:/aspf/workspace/code/base.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/code_base.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/code_base.c$(DependSuffix): code/base.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/code_base.c$(ObjectSuffix) -MF$(IntermediateDirectory)/code_base.c$(DependSuffix) -MM "code/base.c"
 
 $(IntermediateDirectory)/code_base.c$(PreprocessSuffix): code/base.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/code_base.c$(PreprocessSuffix) "code/base.c"
+
+$(IntermediateDirectory)/code_sz.c$(ObjectSuffix): code/sz.c $(IntermediateDirectory)/code_sz.c$(DependSuffix)
+	$(CC) $(SourceSwitch) "D:/aspf/workspace/code/sz.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/code_sz.c$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/code_sz.c$(DependSuffix): code/sz.c
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/code_sz.c$(ObjectSuffix) -MF$(IntermediateDirectory)/code_sz.c$(DependSuffix) -MM "code/sz.c"
+
+$(IntermediateDirectory)/code_sz.c$(PreprocessSuffix): code/sz.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/code_sz.c$(PreprocessSuffix) "code/sz.c"
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

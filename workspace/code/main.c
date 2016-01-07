@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "vers.h"
 #include "base.h"
+#include "sz.h"
 #include "main.h"
 
 MainGlobals MainG;
@@ -12,7 +13,8 @@ int mainInit()
    int r,fail=0;
    if((r=SPFInit())<0)
       fail=1;
-   
+   if((r=szInit())<0)
+      fail=1;
    r=fail?-1:0;
    return r;
 } // mainInit()
@@ -20,6 +22,7 @@ int mainInit()
 // JFL 28 Mar 13
 void mainFinal()
 {
+   szFinal();
    SPFFinal();
 } // mainFinal()
 
