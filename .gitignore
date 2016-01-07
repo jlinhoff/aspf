@@ -45,3 +45,15 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+.vs
+Debug
+Release
+libs/
+*.sdf
+.codelite
+.clang
+*log.txt
+*.opensdf
+*.suo
+*.exe
