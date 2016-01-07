@@ -5,8 +5,8 @@
 ## Debug
 ProjectName            :=spf
 ConfigurationName      :=Debug
-WorkspacePath          := "C:\Users\Joe\aframework\workspace"
-ProjectPath            := "C:\Users\Joe\aframework\workspace"
+WorkspacePath          := "C:\Users\Joe\aspf\workspace"
+ProjectPath            := "C:\Users\Joe\aspf\workspace"
 IntermediateDirectory  :=./Debug
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
@@ -94,7 +94,7 @@ PreBuild:
 ## Objects
 ##
 $(IntermediateDirectory)/code_main.c$(ObjectSuffix): code/main.c $(IntermediateDirectory)/code_main.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "C:/Users/Joe/aframework/workspace/code/main.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/code_main.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "C:/Users/Joe/aspf/workspace/code/main.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/code_main.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/code_main.c$(DependSuffix): code/main.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/code_main.c$(ObjectSuffix) -MF$(IntermediateDirectory)/code_main.c$(DependSuffix) -MM "code/main.c"
 
@@ -102,7 +102,7 @@ $(IntermediateDirectory)/code_main.c$(PreprocessSuffix): code/main.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/code_main.c$(PreprocessSuffix) "code/main.c"
 
 $(IntermediateDirectory)/code_base.c$(ObjectSuffix): code/base.c $(IntermediateDirectory)/code_base.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "C:/Users/Joe/aframework/workspace/code/base.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/code_base.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "C:/Users/Joe/aspf/workspace/code/base.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/code_base.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/code_base.c$(DependSuffix): code/base.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/code_base.c$(ObjectSuffix) -MF$(IntermediateDirectory)/code_base.c$(DependSuffix) -MM "code/base.c"
 
