@@ -62,7 +62,7 @@ AS       := C:/TDM-GCC-64/bin/as.exe
 ## User defined environment variables
 ##
 CodeLiteDir:=C:\Program Files\CodeLite
-Objects0=$(IntermediateDirectory)/code_main.c$(ObjectSuffix) $(IntermediateDirectory)/code_base.c$(ObjectSuffix) $(IntermediateDirectory)/code_sz.c$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/code_main.c$(ObjectSuffix) $(IntermediateDirectory)/code_base.c$(ObjectSuffix) $(IntermediateDirectory)/code_sz.c$(ObjectSuffix) $(IntermediateDirectory)/code_gluemath.c$(ObjectSuffix) 
 
 
 
@@ -116,6 +116,14 @@ $(IntermediateDirectory)/code_sz.c$(DependSuffix): code/sz.c
 
 $(IntermediateDirectory)/code_sz.c$(PreprocessSuffix): code/sz.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/code_sz.c$(PreprocessSuffix) "code/sz.c"
+
+$(IntermediateDirectory)/code_gluemath.c$(ObjectSuffix): code/gluemath.c $(IntermediateDirectory)/code_gluemath.c$(DependSuffix)
+	$(CC) $(SourceSwitch) "C:/Users/linhoff/spf/workspace/code/gluemath.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/code_gluemath.c$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/code_gluemath.c$(DependSuffix): code/gluemath.c
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/code_gluemath.c$(ObjectSuffix) -MF$(IntermediateDirectory)/code_gluemath.c$(DependSuffix) -MM "code/gluemath.c"
+
+$(IntermediateDirectory)/code_gluemath.c$(PreprocessSuffix): code/gluemath.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/code_gluemath.c$(PreprocessSuffix) "code/gluemath.c"
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
