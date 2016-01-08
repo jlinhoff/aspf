@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Joe
-Date                   :=07/01/2016
+Date                   :=08/01/2016
 CodeLitePath           :="C:\Program Files\CodeLite"
 LinkerName             :=C:/TDM-GCC-64/bin/g++.exe
 SharedObjectLinkerName :=C:/TDM-GCC-64/bin/g++.exe -shared -fPIC
@@ -62,7 +62,7 @@ AS       := C:/TDM-GCC-64/bin/as.exe
 ## User defined environment variables
 ##
 CodeLiteDir:=C:\Program Files\CodeLite
-Objects0=$(IntermediateDirectory)/code_main.c$(ObjectSuffix) $(IntermediateDirectory)/code_base.c$(ObjectSuffix) $(IntermediateDirectory)/code_sz.c$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/code_main.c$(ObjectSuffix) $(IntermediateDirectory)/code_base.c$(ObjectSuffix) $(IntermediateDirectory)/code_sz.c$(ObjectSuffix) $(IntermediateDirectory)/code_spmath.c$(ObjectSuffix) 
 
 
 
@@ -116,6 +116,14 @@ $(IntermediateDirectory)/code_sz.c$(DependSuffix): code/sz.c
 
 $(IntermediateDirectory)/code_sz.c$(PreprocessSuffix): code/sz.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/code_sz.c$(PreprocessSuffix) "code/sz.c"
+
+$(IntermediateDirectory)/code_spmath.c$(ObjectSuffix): code/spmath.c $(IntermediateDirectory)/code_spmath.c$(DependSuffix)
+	$(CC) $(SourceSwitch) "D:/aspf/workspace/code/spmath.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/code_spmath.c$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/code_spmath.c$(DependSuffix): code/spmath.c
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/code_spmath.c$(ObjectSuffix) -MF$(IntermediateDirectory)/code_spmath.c$(DependSuffix) -MM "code/spmath.c"
+
+$(IntermediateDirectory)/code_spmath.c$(PreprocessSuffix): code/spmath.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/code_spmath.c$(PreprocessSuffix) "code/spmath.c"
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
