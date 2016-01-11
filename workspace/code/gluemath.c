@@ -1,5 +1,5 @@
 // Copyright (C) 2015 Joe Linhoff - see license
-#include "spmath.h"
+#include "gluemath.h"
 #include <math.h>
 
 float glueYUP[] = {0,1,0};

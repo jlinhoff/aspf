@@ -98,7 +98,7 @@
     <File Name="code/base.h"/>
     <File Name="code/sz.c"/>
     <File Name="code/sz.h"/>
-    <File Name="code/spmath.c"/>
-    <File Name="code/spmath.h"/>
+    <File Name="code/gluemath.c"/>
+    <File Name="code/gluemath.h"/>
   </VirtualDirectory>
 </CodeLite_Project>

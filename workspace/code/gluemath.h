@@ -1,6 +1,6 @@
-// spmath.h
-#ifndef SPMATH_H
-#define SPMATH_H
+// gluemath.h
+#ifndef GLUEMATH_H
+#define GLUEMATH_H
 
 // Copyright 2016 Joe Linhoff
 //
@@ -56,7 +56,6 @@ extern "C" {        //
    (_d_)[4]=(_s_)[4],(_d_)[5]=(_s_)[5],(_d_)[6]=(_s_)[6],(_d_)[7]=(_s_)[7],(_d_)[8]=(_s_)[8],\
    (_d_)[9]=(_s_)[9],(_d_)[10]=(_s_)[10],(_d_)[11]=(_s_)[11]
 #define CPY(_d_,_s_,_n_) {int i=(_n_);for(i--;i>=0;i--)(_d_)[i]=(_s_)[i];}
-
 
 //
 // VECTORS, MATRICES, MATH
@@ -380,4 +379,4 @@ SPF_API void gluePerspective(float *dst16,float fovyHalfRad,float wDivH,float ne
 }                   //
 #endif              //
 
-#endif // SPMATH_H
+#endif // GLUEMATH_H

@@ -5,8 +5,8 @@
 ## Debug
 ProjectName            :=spf
 ConfigurationName      :=Debug
-WorkspacePath          := "D:\aspf\workspace"
-ProjectPath            := "D:\aspf\workspace"
+WorkspacePath          := "C:\Users\linhoff\spf\workspace"
+ProjectPath            := "C:\Users\linhoff\spf\workspace"
 IntermediateDirectory  :=./Debug
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
@@ -62,7 +62,7 @@ AS       := C:/TDM-GCC-64/bin/as.exe
 ## User defined environment variables
 ##
 CodeLiteDir:=C:\Program Files\CodeLite
-Objects0=$(IntermediateDirectory)/code_main.c$(ObjectSuffix) $(IntermediateDirectory)/code_base.c$(ObjectSuffix) $(IntermediateDirectory)/code_sz.c$(ObjectSuffix) $(IntermediateDirectory)/code_spmath.c$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/code_main.c$(ObjectSuffix) $(IntermediateDirectory)/code_base.c$(ObjectSuffix) $(IntermediateDirectory)/code_sz.c$(ObjectSuffix) $(IntermediateDirectory)/code_gluemath.c$(ObjectSuffix) 
 
 
 
@@ -94,7 +94,7 @@ PreBuild:
 ## Objects
 ##
 $(IntermediateDirectory)/code_main.c$(ObjectSuffix): code/main.c $(IntermediateDirectory)/code_main.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "D:/aspf/workspace/code/main.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/code_main.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "C:/Users/linhoff/spf/workspace/code/main.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/code_main.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/code_main.c$(DependSuffix): code/main.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/code_main.c$(ObjectSuffix) -MF$(IntermediateDirectory)/code_main.c$(DependSuffix) -MM "code/main.c"
 
@@ -102,7 +102,7 @@ $(IntermediateDirectory)/code_main.c$(PreprocessSuffix): code/main.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/code_main.c$(PreprocessSuffix) "code/main.c"
 
 $(IntermediateDirectory)/code_base.c$(ObjectSuffix): code/base.c $(IntermediateDirectory)/code_base.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "D:/aspf/workspace/code/base.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/code_base.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "C:/Users/linhoff/spf/workspace/code/base.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/code_base.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/code_base.c$(DependSuffix): code/base.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/code_base.c$(ObjectSuffix) -MF$(IntermediateDirectory)/code_base.c$(DependSuffix) -MM "code/base.c"
 
@@ -110,20 +110,20 @@ $(IntermediateDirectory)/code_base.c$(PreprocessSuffix): code/base.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/code_base.c$(PreprocessSuffix) "code/base.c"
 
 $(IntermediateDirectory)/code_sz.c$(ObjectSuffix): code/sz.c $(IntermediateDirectory)/code_sz.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "D:/aspf/workspace/code/sz.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/code_sz.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "C:/Users/linhoff/spf/workspace/code/sz.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/code_sz.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/code_sz.c$(DependSuffix): code/sz.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/code_sz.c$(ObjectSuffix) -MF$(IntermediateDirectory)/code_sz.c$(DependSuffix) -MM "code/sz.c"
 
 $(IntermediateDirectory)/code_sz.c$(PreprocessSuffix): code/sz.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/code_sz.c$(PreprocessSuffix) "code/sz.c"
 
-$(IntermediateDirectory)/code_spmath.c$(ObjectSuffix): code/spmath.c $(IntermediateDirectory)/code_spmath.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "D:/aspf/workspace/code/spmath.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/code_spmath.c$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/code_spmath.c$(DependSuffix): code/spmath.c
-	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/code_spmath.c$(ObjectSuffix) -MF$(IntermediateDirectory)/code_spmath.c$(DependSuffix) -MM "code/spmath.c"
+$(IntermediateDirectory)/code_gluemath.c$(ObjectSuffix): code/gluemath.c $(IntermediateDirectory)/code_gluemath.c$(DependSuffix)
+	$(CC) $(SourceSwitch) "C:/Users/linhoff/spf/workspace/code/gluemath.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/code_gluemath.c$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/code_gluemath.c$(DependSuffix): code/gluemath.c
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/code_gluemath.c$(ObjectSuffix) -MF$(IntermediateDirectory)/code_gluemath.c$(DependSuffix) -MM "code/gluemath.c"
 
-$(IntermediateDirectory)/code_spmath.c$(PreprocessSuffix): code/spmath.c
-	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/code_spmath.c$(PreprocessSuffix) "code/spmath.c"
+$(IntermediateDirectory)/code_gluemath.c$(PreprocessSuffix): code/gluemath.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/code_gluemath.c$(PreprocessSuffix) "code/gluemath.c"
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
