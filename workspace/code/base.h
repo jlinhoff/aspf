@@ -45,13 +45,18 @@ extern "C" {        //
 typedef char chr;
 typedef void* ptr;
 typedef unsigned int uns;
+
 typedef int (*fnc_ipi)(ptr,int);
+typedef int (*fnc_ipia)(ptr,int,...);
 
 #if BUILD_64BIT
 typedef int64_t intptr; // pointer as int
 #else // !BUILD_64BIT
 typedef int32_t intptr; // pointer as int
 #endif // !BUILD_64BIT
+
+#define ALIGN(_n_,_m_) ((((uns)_n_)+(_m_))&~(_m_))
+#define ALIGNMACH(_n_) ALIGN(_n_,7) // machine alignment
 
 #ifndef SPF_API
 #if BUILD_SPF_EXPORTS
@@ -78,6 +83,12 @@ typedef int32_t intptr; // pointer as int
 
 // test for NaN, inf, ind
 #define FLT_IS_ERR(_f_) (((_f_)!=(_f_))||(0!=(_f_)-(_f_)))
+
+////////////////////////////////////////////////////////////////////////////////
+
+#include <malloc.h>
+#define MemAlloc(_m_,_s_) (*(_m_)=malloc(_s_))?1:-1
+#define MemFree(_m_) free(_m_)
 
 ////////////////////////////////////////////////////////////////////////////////
 // SPF
@@ -110,6 +121,35 @@ SPF_API void ListMakeNode(ListNode *node,int t);
 SPF_API void ListLinkAfter(ListNode *head,ListNode *node);
 SPF_API void ListLinkBefore(ListNode *head,ListNode *node);
 SPF_API void ListUnlink(ListNode *node);
+
+////////////////////////////////////////////////////////////////////////////////
+
+typedef struct {
+   ListNode lnk;
+   fnc_ipia fnc; // int fnc(ListObj *obj,int LISTOBJOP_,..)
+   chr *name; // name
+} ListObj;
+
+enum {
+   LISTOBJOP_NONE,
+   LISTOBJOP_ZAP,
+};
+
+#define LISTOBJ_ZAP(_o_) \
+   (((ListNode*)(_o_))->t>LISTOBJID_FIRST)&&(((ListNode*)(_o_))->t<LISTOBJID_LAST)&& \
+   ((ListObj*)(_o_))->fnc?(((ListObj*)(_o_))->fnc((_o_),LISTOBJOP_ZAP)):(ListUnlink((ListNode*)(_o_)),glueMemFree(_o_))
+   
+#define LISTOBJ_MAKE(_obj_,_n_,_fnc_) \
+   ListMakeNode(LN(_obj_),(_n_)),((ListObj*)(_obj_))->fnc=(fnc_ipia)(_fnc_)
+
+SPF_API int ListObjNew(ListObj **objp,
+   int listObjId,int objSize,int extraSize,
+   fnc_ipia fnc,chr *name,chr *namex);
+   
+// create ListObj object
+// object is build: obj,extra,name
+#define LISTOBJNEW(_objp_,_objid_,_extra_,_fnc_,_name_,_namex_) \
+   ListObjNew(((ListObj**)_objp_),_objid_,sizeof(**(_objp_)),_extra_,_fnc_,_name_,_namex_)
 
 ///////////////////////////////////////////////////////////////////////////////
 #ifdef __cplusplus  // C in C++

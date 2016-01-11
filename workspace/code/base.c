@@ -1,5 +1,6 @@
 // Copyright (C) 2016 Joe Linhoff - see license
 #include "base.h"
+#include "sz.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 // base
@@ -63,5 +64,60 @@ void ListUnlink(ListNode *n)
    n->n->p=n->p;
    n->n=n->p=n; // multiple unlinks OK
 } // ListUnlink()
+
+///////////////////////////////////////////////////////////////////////////////
+
+// JFL 10 Jan 16
+static int listObjDefaultOp(ListObj *obj,int op,...)
+{
+   int r=0;
+   switch(op)
+   {
+   case LISTOBJOP_ZAP:
+      ListUnlink(LN(obj));
+      MemFree(obj);
+      break;
+   } // switch
+   return r;
+} // listObjDefaultOp()
+
+// JFL 10 Jan 16
+int ListObjNew(ListObj **objp,
+   int listObjId,int objSize,int extraSize,
+   fnc_ipia fnc,chr *name,chr *namex)
+{
+   int r,s,ns;
+   ListObj *obj;
+   uint8_t *p;
+   
+   // calc aligned sizes
+   objSize=ALIGNMACH(objSize);
+   extraSize=ALIGNMACH(extraSize);
+   ns=ALIGNMACH(szsize(name,namex));
+
+   // alloc
+   s=objSize+extraSize+ns;
+   if((r=MemAlloc(&obj,s))<0)
+      goto BAIL;
+   memset(obj,0,s);
+   
+   // set
+   ListMakeNode(LN(obj),listObjId);
+   if(!fnc)
+      fnc=(fnc_ipia)listObjDefaultOp;
+   obj->fnc=fnc;
+   if(ns)
+   { // place name after extraSize
+      p=(uint8_t*)obj;
+      p+=objSize+extraSize;
+      obj->name=(chr*)p;
+      szcpy(obj->name,ns,name,namex);
+   }
+   
+   *objp=obj;
+   r=0;
+BAIL:
+   return r;
+} // ListObjNew()
 
 // EOF
