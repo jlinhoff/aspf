@@ -5,14 +5,28 @@
 ////////////////////////////////////////////////////////////////////////////////
 // base
 
+struct {
+   uint16_t sidForObj;
+} baseG;
+
 int SPFInit()
 {
+   memset(&baseG,0,sizeof(baseG));
    return 0;
 } // SPFInit()
 
 void SPFFinal()
 {
 } // SPFFinal
+
+// JFL 11 Jan 16
+uint16_t BaseSidNext()
+{
+   uint16_t sid;
+   if(!(sid=++baseG.sidForObj))
+      sid=baseG.sidForObj=1;
+   return sid;
+} // BaseSidNext()
 
 ////////////////////////////////////////////////////////////////////////////////
 // ListNode
@@ -64,6 +78,34 @@ void ListUnlink(ListNode *n)
    n->n->p=n->p;
    n->n=n->p=n; // multiple unlinks OK
 } // ListUnlink()
+
+///////////////////////////////////////////////////////////////////////////////
+
+// JFL 11 Jan 16
+int ListObjRefMake(ListObjRef *ref,ListNode *obj)
+{
+   if((obj->t<LISTOBJID_FIRST)||(obj->t>LISTOBJID_LAST))
+      return -1;
+   if(!((ListObj*)obj)->sid)
+      ((ListObj*)obj)->sid=BaseSidNext();
+   ref->obj=obj;
+   ref->sid=((ListObj*)obj)->sid;
+   ref->t=obj->t;
+   return 0;
+} // ListObjRefMake();
+
+// JFL 11 Jan 16
+ListNode* ListObjRefGet(ListObjRef *ref,uint16_t t)
+{
+   ListNode *obj;
+   if((obj=ref->obj))
+      return 0;
+   if(ref->sid != ((ListObj*)obj)->sid)
+      return 0;
+   if(t && (ref->t!=t))
+      return 0;
+   return obj;
+} // ListObjRefGet()
 
 ///////////////////////////////////////////////////////////////////////////////
 

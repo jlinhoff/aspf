@@ -126,6 +126,7 @@ SPF_API void ListUnlink(ListNode *node);
 
 typedef struct {
    ListNode lnk;
+   uint16_t sid;
    fnc_ipia fnc; // int fnc(ListObj *obj,int LISTOBJOP_,..)
    chr *name; // name
 } ListObj;
@@ -150,6 +151,25 @@ SPF_API int ListObjNew(ListObj **objp,
 // object is build: obj,extra,name
 #define LISTOBJNEW(_objp_,_objid_,_extra_,_fnc_,_name_,_namex_) \
    ListObjNew(((ListObj**)_objp_),_objid_,sizeof(**(_objp_)),_extra_,_fnc_,_name_,_namex_)
+
+///////////////////////////////////////////////////////////////////////////////
+
+typedef struct {
+   ListNode *obj;
+   uint16_t sid;
+   uint16_t t;
+} ListObjRef;
+
+SPF_API int ListObjRefMake(ListObjRef *ref,ListNode *obj);
+SPF_API ListNode* ListObjRefGet(ListObjRef *ref,uint16_t t);
+
+///////////////////////////////////////////////////////////////////////////////
+
+
+enum {
+   LISTOBJID_FIRST=1000,
+   LISTOBJID_LAST=10000,
+};
 
 ///////////////////////////////////////////////////////////////////////////////
 #ifdef __cplusplus  // C in C++
