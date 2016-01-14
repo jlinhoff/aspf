@@ -1,6 +1,7 @@
 // Copyright (C) 2016 Joe Linhoff - see license
 #include "base.h"
 #include "sz.h"
+#include <time.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 // base

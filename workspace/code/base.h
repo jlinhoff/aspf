@@ -80,7 +80,9 @@ typedef int32_t intptr; // pointer as int
 #define FLOATS_PASSED_AS double
 
 #define BRK()
-
+#define ret(_r_) do{goto BAIL;}while(0)
+#define bret(_r_) do{r=(_r_;goto BAIL;}while(0)
+   
 // test for NaN, inf, ind
 #define FLT_IS_ERR(_f_) (((_f_)!=(_f_))||(0!=(_f_)-(_f_)))
 
@@ -164,7 +166,6 @@ SPF_API int ListObjRefMake(ListObjRef *ref,ListNode *obj);
 SPF_API ListNode* ListObjRefGet(ListObjRef *ref,uint16_t t);
 
 ///////////////////////////////////////////////////////////////////////////////
-
 
 enum {
    LISTOBJID_FIRST=1000,

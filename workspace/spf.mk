@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Joe
-Date                   :=11/01/2016
+Date                   :=14/01/2016
 CodeLitePath           :="C:\Program Files\CodeLite"
 LinkerName             :=C:/TDM-GCC-64/bin/g++.exe
 SharedObjectLinkerName :=C:/TDM-GCC-64/bin/g++.exe -shared -fPIC
@@ -62,7 +62,7 @@ AS       := C:/TDM-GCC-64/bin/as.exe
 ## User defined environment variables
 ##
 CodeLiteDir:=C:\Program Files\CodeLite
-Objects0=$(IntermediateDirectory)/code_main.c$(ObjectSuffix) $(IntermediateDirectory)/code_base.c$(ObjectSuffix) $(IntermediateDirectory)/code_sz.c$(ObjectSuffix) $(IntermediateDirectory)/code_gluemath.c$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/code_main.c$(ObjectSuffix) $(IntermediateDirectory)/code_base.c$(ObjectSuffix) $(IntermediateDirectory)/code_sz.c$(ObjectSuffix) $(IntermediateDirectory)/code_gluemath.c$(ObjectSuffix) $(IntermediateDirectory)/code_support.c$(ObjectSuffix) 
 
 
 
@@ -124,6 +124,14 @@ $(IntermediateDirectory)/code_gluemath.c$(DependSuffix): code/gluemath.c
 
 $(IntermediateDirectory)/code_gluemath.c$(PreprocessSuffix): code/gluemath.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/code_gluemath.c$(PreprocessSuffix) "code/gluemath.c"
+
+$(IntermediateDirectory)/code_support.c$(ObjectSuffix): code/support.c $(IntermediateDirectory)/code_support.c$(DependSuffix)
+	$(CC) $(SourceSwitch) "D:/aspf/workspace/code/support.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/code_support.c$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/code_support.c$(DependSuffix): code/support.c
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/code_support.c$(ObjectSuffix) -MF$(IntermediateDirectory)/code_support.c$(DependSuffix) -MM "code/support.c"
+
+$(IntermediateDirectory)/code_support.c$(PreprocessSuffix): code/support.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/code_support.c$(PreprocessSuffix) "code/support.c"
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

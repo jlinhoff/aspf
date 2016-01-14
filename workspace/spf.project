@@ -100,5 +100,7 @@
     <File Name="code/sz.h"/>
     <File Name="code/gluemath.c"/>
     <File Name="code/gluemath.h"/>
+    <File Name="code/support.c"/>
+    <File Name="code/support.h"/>
   </VirtualDirectory>
 </CodeLite_Project>
