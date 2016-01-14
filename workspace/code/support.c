@@ -7,6 +7,8 @@
 
 #define TIMERLONG(_tr_) (_tr_)->priv[0]
 
+#if !BUILD_MSVC
+
 // JFL 12 Apr 07
 int64_t glueTimerOp(glueTimerRec *tr,uns op,...)
 { // hopefully: a nano-second, free running timer
@@ -96,5 +98,65 @@ int64_t glueTimerOp(glueTimerRec *tr,uns op,...)
 BAIL:
    return r;
 } // glueTimerOp()
+
+#endif // !BUILD_MSVC
+#if BUILD_MSVC
+
+// JFL 12 Apr 07
+int64 glueTimerOp(glueTimerRec *tr,uns op,...)
+{
+   int64 r;
+   LARGE_INTEGER tt;
+   uns64 nn;
+
+   switch(op)
+   {
+   case GLUETIMEROP_START:
+      QueryPerformanceCounter(&tt);
+      tr->priv[0]=tt.QuadPart;
+      break;
+   case GLUETIMEROP_STOP: // no stopping
+   case GLUETIMEROP_TICKS:
+      QueryPerformanceCounter(&tt);
+      nn=tt.QuadPart-tr->priv[0];
+      if(nn<=0x7fffffffffffffff)
+         r=nn;
+      else
+      {
+         r=-2; // overflow
+         BRK();
+      }
+      goto BAIL;
+   case GLUETIMEROP_TICKS_RESTART:
+      QueryPerformanceCounter(&tt);
+      nn=tt.QuadPart-tr->priv[0];
+      if(nn<=0x7fffffffffffffff)
+         r=nn;
+      else
+         r=-2; // overflow
+      tr->priv[0]=tt.QuadPart; // reset
+      goto BAIL;
+   case GLUETIMEROP_TICKSPERSECOND:
+      if(!(r=QueryPerformanceFrequency(&tt))) // in counts per second
+         {r=-3; goto BAIL;}
+      if(tt.QuadPart<=0x7fffffffffffffff)
+         r=tt.QuadPart;
+      else
+         r=-2; // overflow
+      goto BAIL;
+   case GLUETIMEROP_TICKSPERMILLISECOND:
+      if(!(r=QueryPerformanceFrequency(&tt))) // in counts per second
+         {r=-4; goto BAIL;}
+      r=tt.QuadPart/1000;
+      goto BAIL;
+   default:
+      bret(-1);
+   } // switch
+
+   r=0;
+BAIL:
+   return r;
+} // glueTimerOp()
+#endif // BUILD_MSVC
 
 // EOF
